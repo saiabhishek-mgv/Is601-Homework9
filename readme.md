@@ -1,37 +1,58 @@
-# RestAPI for Creating QR Codes
+# Homework 9
 
-For this assignment I want you to go over the videos and I've created a X number of errors in the code that you will have to find and fix them.  You should keep running the tests and read the error and try to understand what it mean.  The purpose of this assignment is to get you accustomed to running the project and following the steps that the program uses to process requests.
+For this assignment, I have fixed the repository filled with broken code for a QR Code API. The objective was to understand the errors, run the tests, and ensure that the entire QR program passes GitHub Actions. Below is a detailed summary of what I have done.
 
-Here is my repo with the working code: [https://github.com/kaw393939/fastapi_spring2024](https://github.com/kaw393939/fastapi_spring2024)
+# Steps Taken
+1. Cloning and Initial Setup
 
-You can get this repo working with the install instructions below.  The assignment repo will not work because its filled with broken code.
+2. Created a Virtual Environment:
+python3 -m venv venv
 
-**To submit this assignment, you should make your own repository and add the remote to git and then push your fixed code to your own repo.** 
+3. Activated the Virtual Environment:
+source venv/bin/activate
 
-## Grading
+4. Installed the Required Packages:
+pip install -r requirements.txt
 
-You will only get 100 if the entire QR program passes GitHub actions, so you will need to update the production.yml file to have your info and setup your environment variables on the repository.
+5. Created the Necessary Directory:
+mkdir qr_codes
 
-# Instructor Videos
-* [Rest API Project Overview](https://youtu.be/xEcBKSSXxhQ)
-* [QR Code Overview for Assignment](https://youtu.be/E6b9VkQpQ-U)
+This step was crucial to ensure the Docker container had the right permissions to write to the qr_codes directory.
 
+## Debugging and Fixing Code
 
-## Optional but extremely helpful:
+### Ran pytest in docker and fixed broken tests to ensure they pass successfully.
+docker compose exec fastapi pytest 
 
-1. [Best Series to Learn Bash Scripting Seriously learn this!!!](https://www.youtube.com/playlist?list=PLIhvC56v63IKioClkSNDjW7iz-6TFvLwS)
+### Updated Dockerfile:
+Streamlined the installation of dependencies.
 
-2.  [Listen to someone else explain FastAPI and go through a project](https://www.youtube.com/watch?v=cbASjoZZGIw)
+### Updated production.yml:
+Configured GitHub Actions to run tests, build Docker images, and push to DockerHub.
+Made sure to set up environment variables and credentials for DockerHub correctly.
+Made necessary changes to the production.yml to include my repository information and environment variables.
 
-# Install
-1. Clone
-2. Make virtual environment:  python3 -m venv venv
-3. Activate virtual environment: source venv/bin/activate
-4. Install requirements: pip install -r requirements.txt
-5. **IMPORTANT** run: mkdir qr_codes to create a qr codes directory to save in, permissions will be messed up and the docker container won't be able to write to the qr_codes directory if you don't.
-6. Note: make sure docker is started
-7. run pytest locally to check that it works locally
-8. Start the app with docker compose up --build
-9. Goto http://localhost/docs to view openapi spec documentation
-10. Click "authorize" input username: admin password: secret
-11. Test making,  retrieving, and deleting QR codes on the spec page.
+### Resolved Vulnerabilities:
+Updated the gunicorn version to 22.0.0 to address the CVE-2024-1135 vulnerability.
+Debugged and Fixed Tests:
+
+### Started the App with Docker:
+docker compose up --build
+
+### Accessed the API Documentation:
+
+Opened the browser and navigated to http://localhost/docs to view the OpenAPI spec documentation.
+Authorized the API:
+
+Clicked "authorize" and entered the credentials:
+Username: admin
+Password: secret
+
+Tested API Endpoints:
+Used the spec page to test creating, retrieving, and deleting QR codes.
+Ensuring CI/CD Pipeline Success
+
+### Updated GitHub Actions Workflow:
+
+### Committed and Pushed Changes:
+Ensured that all steps in the CI/CD pipeline passed successfully, including building, and pushing the Docker image.
