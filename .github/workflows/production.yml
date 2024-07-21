@@ -61,10 +61,10 @@ jobs:
           tags: saiabhishekmgv/homework9:${{ github.sha }} # Uses the Git SHA for tagging
           platforms: linux/amd64,linux/arm64 # Multi-platform support
           cache-from: type=registry,ref=saiabhishekmgv/homework9:cache
-          cache-to: type=inline,mode=max
+          cache-to:  type=registry,ref=saiabhishekmgv/homework9:cache,mode=max
           
       - name: Scan the Docker image
-        uses: aquasecurity/trivy-action@master
+        uses: aquasecurity/trivy-action@@v0.6.0
         with:
           image-ref: 'saiabhishekmgv/homework9:${{ github.sha }}'
           format: 'table'
